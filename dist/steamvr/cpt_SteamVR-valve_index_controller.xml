@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<inputs interaction_profile="/interaction_profiles/valve/index_controller">
+	<pose name="aim" base="/user/hand/left/input/grip/pose" binding_path="/user/hand/left/input/aim/pose">
+		<position unit="meters" symmetrical="true">
+			<X>0.002</X>
+			<Y>-0.029</Y>
+			<Z>-0.106</Z>
+		</position>
+		<orientation symmetrical="true">
+			<W>0.89</W>
+			<X>-0.46</X>
+			<Y>-0.02</Y>
+			<Z>-0.01</Z>
+		</orientation>
+	</pose>
+	<pose name="aim" base="/user/hand/right/input/grip/pose" binding_path="/user/hand/right/input/aim/pose">
+		<position unit="meters" symmetrical="true">
+			<X>-0.002</X>
+			<Y>-0.029</Y>
+			<Z>-0.106</Z>
+		</position>
+		<orientation symmetrical="true">
+			<W>0.89</W>
+			<X>-0.46</X>
+			<Y>0.02</Y>
+			<Z>0.01</Z>
+		</orientation>
+	</pose>
+	<pose name="palm" base="/user/hand/left/input/grip/pose" binding_path="/user/hand/left/input/palm_ext/pose">
+		<position unit="meters" symmetrical="true">
+			<X>-0.015</X>
+			<Y>0.000</Y>
+			<Z>0.001</Z>
+		</position>
+		<orientation symmetrical="true">
+			<W>0.89</W>
+			<X>-0.46</X>
+			<Y>-0.02</Y>
+			<Z>-0.01</Z>
+		</orientation>
+	</pose>
+	<pose name="palm" base="/user/hand/right/input/grip/pose" binding_path="/user/hand/right/input/palm_ext/pose">
+		<position unit="meters" symmetrical="true">
+			<X>0.015</X>
+			<Y>0.000</Y>
+			<Z>0.001</Z>
+		</position>
+		<orientation symmetrical="true">
+			<W>0.89</W>
+			<X>-0.46</X>
+			<Y>0.02</Y>
+			<Z>0.01</Z>
+		</orientation>
+	</pose>
+</inputs>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<cpt_configuration>
+    <runtimes>
+        <runtime name="SteamVR" matches="SteamVR/OpenXR">
+            <canonical_items>
+                <inputs>
+                    <input interaction_profile="/interaction_profiles/valve/index_controller">steamvr/cpt_SteamVR-valve_index_controller.xml</input>
+                </inputs>
+            </canonical_items>
+        </runtime>
+        <runtime name="Oculus" matches="Oculus">
+        </runtime>
+        <runtime name="Monado" matches="Monado*">
+        </runtime>
+        <runtime name="WMR" matches="Windows Mixed Reality Runtime">
+        </runtime>
+    </runtimes>
+
+    <output_items>
+        <item>inputs</item>
+    </output_items>
+
+    <item_configuration>
+        <inputs>
+            <interaction_profiles>
+                <interaction_profile>/interaction_profiles/valve/index_controller</interaction_profile>
+                <interaction_profile>/interaction_profiles/oculus/touch_controller</interaction_profile>
+                <interaction_profile requires_extension="XR_EXT_hp_mixed_reality_controller">/interaction_profiles/hp/mixed_reality_controller</interaction_profile>
+            </interaction_profiles>
+
+            <actions>
+                <action name="grip" type="pose" suggested_binding="/input/grip/pose" reference="true">
+                    <subaction_path>/user/hand/left</subaction_path>
+                    <subaction_path>/user/hand/right</subaction_path>
+                </action>
+
+                <action name="aim" type="pose" suggested_binding="/input/aim/pose" base="grip">
+                    <subaction_path>/user/hand/left</subaction_path>
+                    <subaction_path>/user/hand/right</subaction_path>
+                </action>
+
+                <action name="palm" type="pose" suggested_binding="/input/palm_ext/pose" base="grip" requires_extension="XR_EXT_palm_pose">
+                    <subaction_path>/user/hand/left</subaction_path>
+                    <subaction_path>/user/hand/right</subaction_path>
+                </action>
+            </actions>
+        </inputs>
+    </item_configuration>
+</cpt_configuration>
