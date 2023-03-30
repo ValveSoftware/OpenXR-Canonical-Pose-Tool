@@ -32,8 +32,8 @@ Setup:
 Install:
 
 * https://developer.android.com/studio
-  * NDK
-  * Android SDK
+    * NDK
+    * Android SDK
 * https://developer.oculus.com/downloads/package/oculus-developer-hub-win
 
 Open the root of the repository in Android Studio. Press Run.
@@ -44,23 +44,27 @@ Open the root of the repository in Android Studio. Press Run.
 * Quest: external data path. Looking at the Quest storage on the PC, this
   is `Android/data/com.danwillm.oxr_canonical_pose_tool/files`.
 
-
 ## Configuration
 
 Configuration for the tool is done in `cpt_config.xml`.
 
-Currently only pose checking is supported. This is done in the `inputs` item.
+Each item will output one file on each run of the tool. Items that will output files on run can be configured
+under `outputs`.
 
 ### Inputs
 
-Interaction profiles to suggest available actions for are defined in `interaction_profiles`.
+Configuration for inputs (items that require the use of an interaction profile) is done under the `inputs` node.
 
-If an interaction profile requires an extension to be able to use, the attribute `requires_extension` in
-an `interaction_profile` tag can be specified with the extension.
+Interaction profiles to suggest binding profiles for are defined in the `interaction_profiles` node. Each child node
+should have a name of `interaction_profile` and a value of the interaction profile path. Available attributes of
+the `interaction_profile` node are:
 
-Actions defined in `actions`.
+* `requires_extension` - Interaction profiles that require an extension to be used can specify the extension to request
+  in this attribute.
 
-Each `action` tag can have the following attributes:
+Actions defined in the `actions` node.
+
+Each child `action` node can have the following attributes:
 
 * `name` - The name of the action.
 * `type` - The type of action. Supported values:
@@ -74,5 +78,11 @@ Each `action` tag can have the following attributes:
 
 ### Runtimes
 
-Runtimes can add their own canonical reference files to `runtimes`, along with a way to match their `runtimeName` to a
-name to define the runtime by in the tool.
+Runtimes can add their own canonical reference files to `runtimes`, along with a way to match their `runtimeName` in the
+OpenXR instance properties to a name to define the runtime by in the tool.
+
+Files output from the tool can be added directly to `cpt_config.xml`, under `runtimes`.
+
+Reference files for inputs should be in `inputs`, with a child node called `input` and must have
+an `interaction_profile` attribute specifying the interaction profile that the reference file represents. The value of the node must be the
+relative path from the executable to the reference file.
