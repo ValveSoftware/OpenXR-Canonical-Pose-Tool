@@ -79,10 +79,8 @@ void MakeFile(const std::vector<std::unique_ptr<IItemSet>>& item_sets, const Xrp
 }
 
 static std::map<std::string, std::unique_ptr<IItemSet>> GetAllItemSets(const pugi::xml_node& config_node) {
-	const pugi::xml_node item_configuration_node = config_node.child("item_configuration");
-
 	std::map<std::string, std::unique_ptr<IItemSet>> item_sets;
-	item_sets["inputs"] = std::make_unique<InputItemSet>(item_configuration_node.child("inputs"));
+	item_sets["inputs"] = std::make_unique<InputItemSet>(config_node.child("inputs"));
 
 	return item_sets;
 }
@@ -107,13 +105,13 @@ int main(int argc, char* argv[]) {
 			return -1;
 		}
 
-		pugi::xml_node config_node = config_doc.child("cpt_configuration");
+		pugi::xml_node config_node = config_doc.child("canonical_pose_tool");
 
 		std::vector<std::unique_ptr<IItemSet>> enabled_item_sets{};
 		{
 			std::map<std::string, std::unique_ptr<IItemSet>> all_item_sets = GetAllItemSets(config_node);
 
-			for (const pugi::xpath_node enabled_item_node : config_node.select_nodes("./output_items/item")) {
+			for (const pugi::xpath_node enabled_item_node : config_node.select_nodes("./output/item")) {
 				const std::string enabled_item = enabled_item_node.node().text().get();
 
 				if (!all_item_sets.contains(enabled_item)) {

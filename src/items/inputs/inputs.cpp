@@ -126,13 +126,13 @@ bool InputItemSet::Init(const XrpContext &context) {
 
 		const XrResult result = xrSuggestInteractionProfileBindings(context.instance, &suggested_bindings_info);
 		if (result == XR_ERROR_PATH_UNSUPPORTED) {
-			XrpLog("interaction profile did not support suggested bindings");
+			XrpLog("Interaction profile: % path unsupported", interaction_profile_string.c_str());
 			continue;
 		}
 
 		XRP_CHECK_OR_RETURN(context, result);
 
-		XrpLog("set interaction profile for: %s", interaction_profile_string.c_str());
+		XrpLog("Set interaction profile for: %s", interaction_profile_string.c_str());
 	}
 
 	XrSessionActionSetsAttachInfo attach_info = {
@@ -150,7 +150,7 @@ static bool LoadReferenceXMLDocument(const XrpContext &context, const std::strin
 	pugi::xml_document config;
 	GetConfigurationFile(config);
 
-	for (const pugi::xpath_node &runtime_input_xpath_node : config.select_nodes("//runtime/canonical_items/inputs/input")) {
+	for (const pugi::xpath_node &runtime_input_xpath_node : config.select_nodes("//runtime/inputs/input")) {
 		const pugi::xml_node runtime_section_node = runtime_input_xpath_node.node();
 
 		if (runtime_section_node.attribute("interaction_profile").value() == interaction_profile) {
